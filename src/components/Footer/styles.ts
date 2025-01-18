@@ -114,7 +114,7 @@ export const Right = styled.div`
   align-items: center;
 
   h2 {
-    font-family: Inter;
+    font-family: Poppins;
     font-size: 28px;
     font-style: normal;
     font-weight: 600;

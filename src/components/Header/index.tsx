@@ -10,6 +10,9 @@ export function Header() {
         <img src="./logo2.png" alt="" />
         <ItemsMenu>
           <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
+            Início
+          </Link>
+          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
             Humanoterapia
           </Link>
           <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
@@ -17,15 +20,6 @@ export function Header() {
           </Link>
           <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
             Sobre mim
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Psicoterapias Holísticas
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Radiestesia Radiônica
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Reiki
           </Link>
           <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
             Contato

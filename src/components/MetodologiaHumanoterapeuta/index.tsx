@@ -1,20 +1,16 @@
-import { ReactNode } from "react";
 
 import {
   Container,
   Content,
-  ImageContent,
   TextContainer,
-  TextContent,
 } from "./styles";
-import { GridContent } from "../elements/GridContent";
-import { AltGridContent } from "../elements/AltGridContent";
 import Servicos from "../Servicos";
+import BannerTitleSection from "../elements/BannerTitleSection";
 
 export function MetodologiaHumanoterapeuta() {
   return (
     <Container>
-      <h1>Metodologia Humanoterapeuta</h1>
+      <BannerTitleSection behindText="Metodologia Humanoterapeuta" mainText="Metodologia Humanoterapeuta" />
       <TextContainer>
         <p>
           A metodologia Humanoterapeuta é um tratamento energético e espiritual

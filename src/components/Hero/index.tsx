@@ -1,4 +1,4 @@
-import { Container, Content, LeftContent, RightContent } from "./styles";
+import { Buttons, Container, Content, FirstButton, LastButton, LeftContent } from "./styles";
 
 export function Hero() {
   return (
@@ -13,7 +13,10 @@ export function Hero() {
             Agende sua primeira consulta agora e dê o primeiro passo em direção
             a uma vida mais saudável e equilibrada.
           </p>
-          <button>Agendar consulta</button>
+          <Buttons>
+            <FirstButton>Quero saber mais</FirstButton>
+            <LastButton>Agendar consulta</LastButton>
+          </Buttons>
         </LeftContent>
         {/* <RightContent>
           <div>

@@ -1,15 +1,27 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  display: block;
-  max-width: 1394px;
   width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  margin-bottom: 6.25rem;
-  margin-top: 6.25rem;
+  background-color: #fff;
+  height: fit-content;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding: 75px 0;
+  gap: 40px;
+`;
 
+export const Content = styled.div`
+  max-width: 1394px;
+
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-flow: column;
   gap: 50px;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
 
   @media (max-width: 1750px) {
     max-width: 965px;
@@ -20,10 +32,6 @@ export const Container = styled.section`
 
   @media (max-width: 767px) {
     max-width: 350px;
-
-    h1 {
-      text-align: center;
-    }
   }
 `;
 

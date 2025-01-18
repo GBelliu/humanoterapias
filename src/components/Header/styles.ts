@@ -124,7 +124,7 @@ export const ItemsMenu = styled.div`
   display: flex;
   justify-content: space-between;
   color: #fff;
-  gap: 20px;
+  gap: 35px;
   a {
     font-size: 16px;
     text-decoration: none;

@@ -1,9 +1,10 @@
+import BannerTitleSection from "../elements/BannerTitleSection";
 import { Container, Content, LeftContent, RightContent } from "./styles";
 
 export function Sobre() {
   return (
     <Container>
-      <h1>Sobre mim</h1>
+      <BannerTitleSection behindText="Sobre mim" mainText="Sobre mim" />
       <Content>
         <LeftContent>
           <div>

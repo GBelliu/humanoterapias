@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { Container, ContentFormulario, Forms, Informacoes } from "./styles";
+import { Container, Content, ContentFormulario, Forms, Informacoes } from "./styles";
 import emailjs from "@emailjs/browser";
 import Loader from "../elements/Loader";
 
 import { ArrowRight } from "lucide-react";
+import BannerTitleSection from "../elements/BannerTitleSection";
 
 function Contato() {
   const [num1, setNum1] = useState(Math.floor(Math.random() * 10));
@@ -63,77 +64,80 @@ function Contato() {
 
   return (
     <Container id="contato">
-      <ContentFormulario>
-        <Forms>
-          <h1>Vamos agendar uma consulta?</h1>
-          <p>Preencha o formulário abaixo que irei retornar em breve.</p>
-          {/* <form action="" onSubmit={sendEmail} ref={form}> */}
-          <form action="" ref={form}>
-            <div className="formItem">
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Nome"
-                value={data.name}
-                onChange={(e) => setData({ ...data, name: e.target.value })}
-                required
-              />
-            </div>
-            <div className="formItem">
-              <input
-                type="text"
-                name="phone"
-                id="phone"
-                placeholder="Celular"
-                maxLength={16}
-                value={data.phone}
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    phone: e.target.value.replace(
-                      /(\d{2})(\d{1})(\d{4})(\d{4})/,
-                      "($1) $2 $3-$4"
-                    ),
-                  })
-                }
-                required
-              />
-            </div>
+      <BannerTitleSection behindText="Vamos agendar uma consulta?" mainText="Vamos agendar uma consulta?" />
+      <Content>
+        <ContentFormulario>
+          <Forms>
 
-            <div className="formItem">
-              <input
-                type="mail"
-                name="mail"
-                id="mail"
-                placeholder="E-mail"
-                value={data.mail}
-                onChange={(e) => setData({ ...data, mail: e.target.value })}
-                required
-              />
-            </div>
-            <div className="formItem">
-              <input
-                type="text"
-                name="calc"
-                id="calc"
-                placeholder={"Serviço"}
-                value={data.servico}
-                onChange={(e) => setData({ ...data, servico: e.target.value })}
-                required
-              />
-            </div>
-          </form>
-          <button
-            type="submit"
+            <p>Preencha o formulário abaixo que irei retornar em breve.</p>
+            {/* <form action="" onSubmit={sendEmail} ref={form}> */}
+            <form action="" ref={form}>
+              <div className="formItem">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Nome"
+                  value={data.name}
+                  onChange={(e) => setData({ ...data, name: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="formItem">
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  placeholder="Celular"
+                  maxLength={16}
+                  value={data.phone}
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      phone: e.target.value.replace(
+                        /(\d{2})(\d{1})(\d{4})(\d{4})/,
+                        "($1) $2 $3-$4"
+                      ),
+                    })
+                  }
+                  required
+                />
+              </div>
+
+              <div className="formItem">
+                <input
+                  type="mail"
+                  name="mail"
+                  id="mail"
+                  placeholder="E-mail"
+                  value={data.mail}
+                  onChange={(e) => setData({ ...data, mail: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="formItem">
+                <input
+                  type="text"
+                  name="calc"
+                  id="calc"
+                  placeholder={"Serviço"}
+                  value={data.servico}
+                  onChange={(e) => setData({ ...data, servico: e.target.value })}
+                  required
+                />
+              </div>
+            </form>
+            <button
+              type="submit"
             // type="submit"
             // text={loadingForm ? <Loader /> : "Enviar"}
             // icon={<ArrowRight color="#FFFFFF" />}
-          >
-            Enviar
-          </button>
-        </Forms>
-      </ContentFormulario>
+            >
+              Enviar
+            </button>
+          </Forms>
+        </ContentFormulario>
+      </Content>
     </Container>
   );
 }

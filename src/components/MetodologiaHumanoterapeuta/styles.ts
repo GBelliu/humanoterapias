@@ -10,9 +10,6 @@ export const Container = styled.div`
   align-items: center;
   padding: 75px 0;
   gap: 40px;
-  h1 {
-    color: black;
-  }
   p {
     color: black;
   }
@@ -23,6 +20,7 @@ export const Container = styled.div`
     }
   }
 `;
+
 export const Content = styled.div`
   max-width: 1394px;
 

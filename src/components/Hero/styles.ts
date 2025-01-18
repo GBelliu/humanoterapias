@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("./lotusbgg.png");
+  background: linear-gradient(rgba(4,4,57,1), rgba(0,0,0,0.25)),url("./lotusbgg.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -26,8 +26,10 @@ export const Content = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 75px 0;
+  justify-content: center;
+  padding: 100px 0;
   gap: 25px;
+  
 
   img {
     width: 100%;
@@ -57,16 +59,18 @@ export const Content = styled.div`
 `;
 
 export const LeftContent = styled.div`
-  width: 60%;
+  width: 90%;
   height: 100%;
   display: flex;
   flex-flow: column;
-  gap: 25px;
+  gap: 35px;
+  align-items: center;
   h1 {
     font-size: 48px;
     color: #fff;
     font-weight: 700;
     line-height: normal;
+    text-align: center;
   }
 
   p {
@@ -74,11 +78,13 @@ export const LeftContent = styled.div`
     font-weight: 400;
     line-height: 24px;
     color: #f5f5f5;
+    text-align: center;
   }
 
   button {
     width: fit-content;
     padding: 15px 35px;
+    margin-top: 15px;
     background-color: #fff;
     color: #040439;
     font-size: 18px;
@@ -87,7 +93,7 @@ export const LeftContent = styled.div`
     border-radius: 8px;
     cursor: pointer;
     transition: 0.4s all ease-in-out;
-    box-shadow: 0px 5px 7px -3px rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 1px 7px 1px rgba(255, 255, 255, 0.5), 0px 1px 7px 5px rgba(4, 4, 57, 0.5);
     &:hover {
       transform: scale(1.03) translateZ(0);
     }
@@ -112,14 +118,49 @@ export const LeftContent = styled.div`
     }
   }
 `;
-export const RightContent = styled.div`
-  width: 40%;
-  height: 100%;
-  display: flex;
-  flex-flow: column;
-  gap: 25px;
 
-  @media (max-width: 767px) {
-    display: none;
-  }
-`;
+export const Buttons = styled.div`
+display: flex;
+align-items: center;
+gap: 25px;
+`
+export const FirstButton = styled.div`
+ width: fit-content;
+    padding: 15px 35px;
+    margin-top: 15px;
+    background-color: #fff;
+    color: #040439;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.4s all ease-in-out;
+    box-shadow: 0px 1px 7px 1px rgba(255, 255, 255, 0.5), 0px 1px 7px 5px rgba(4, 4, 57, 0.5);
+    &:hover {
+      transform: scale(1.03) translateZ(0);
+    }
+    &:active {
+      transform: scale(0.95) translateZ(0) !important;
+    }
+`
+export const LastButton = styled.div`
+ width: fit-content;
+    padding: 15px 35px;
+    margin-top: 15px;
+    background-color: transparent;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.4s all ease-in-out;
+    box-shadow: 0px 1px 7px 1px rgba(255, 255, 255, 0.9), 0px 1px 7px 5px rgba(4, 4, 57, 0.9);
+    &:hover {
+      transform: scale(1.03) translateZ(0);
+    }
+    &:active {
+      transform: scale(0.95) translateZ(0) !important;
+    }
+`
