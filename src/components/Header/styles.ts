@@ -10,7 +10,7 @@ export const Container = styled.header<ContainerProps>`
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: ${({ $isScrolled, theme }) =>
+  background-color: ${({ $isScrolled }) =>
     $isScrolled ? "rgba(253, 251, 247, 0.95)" : "transparent"};
   backdrop-filter: ${({ $isScrolled }) =>
     $isScrolled ? "blur(20px)" : "none"};
