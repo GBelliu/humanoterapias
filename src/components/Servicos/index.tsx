@@ -1,194 +1,192 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import {
   Container,
-  ContentService,
-  LeftContent,
-  RightContent,
-  Item,
-  ContentItem,
+  Content,
+  SectionLabel,
+  SectionTitle,
+  SectionDescription,
+  ServicesWrapper,
+  ServicesList,
+  ServiceItem,
+  ServiceDetails,
+  ServiceImage,
+  ServiceContent,
+  ServiceTitle,
+  ServiceDescription,
+  CTAButton,
+  QuestionBadges,
+  QuestionBadge,
 } from "./styles";
-import { Link } from "react-scroll";
+
+const services = [
+  {
+    id: 1,
+    title: "Mesa Quântica",
+    description:
+      "A Mesa Quântica representa o ponto de partida em direção à Humanoterapia, usando a radiestesia, radiônica e física quântica para investigar e diagnosticar minuciosamente processos espirituais, mentais ou emocionais. Ela desvenda a raiz de dores e problemas, inclusive acessando encarnações passadas, oferecendo uma análise profunda sobre a origem de cada questão.",
+    image: "./mesa.jpg",
+  },
+  {
+    id: 2,
+    title: "Humanometria",
+    description:
+      "A Humanometria trata a energia presa no campo eletromagnético. Quando não conseguimos lidar com emoções difíceis, elas ficam presas e se transformam em energia negativa, causando doenças e bloqueios. A técnica também trata auto obsessão, obsessão de encarnado ou desencarnado e demais processos espirituais.",
+    image: "./humanometria.png",
+  },
+  {
+    id: 3,
+    title: "Taquions Tock",
+    description:
+      "A Técnica de Taquions Tock trabalha com a frequência de quinta dimensão, atuando nos campos mental e emocional para tratamento de traumas e padrões conscientes e inconscientes. A energia taquiônica sintoniza com quem somos em Essência, ampliando nossa consciência e promovendo bem-estar.",
+    image: "./taquions.jpeg",
+  },
+  {
+    id: 4,
+    title: "TDR",
+    description:
+      "O tratamento com a TDR trabalha experiências de muita intensidade emocional, mental ou física. A técnica atua na desconstrução do que causa a dor para que os mecanismos de defesa não sejam acionados, proporcionando fluidez energética na vida da pessoa.",
+    image: "./tdr.jpeg",
+  },
+  {
+    id: 5,
+    title: "Regressão com Reprogramação",
+    description:
+      "Esta técnica rastreia registros de memórias inconscientes no corpo mental e emocional, de fatos ocorridos nesta ou em outra vida que estão causando dor e bloqueando o fluxo da energia. Durante a aplicação, a pessoa se mantém lúcida e consciente.",
+    image: "./regressao.jpeg",
+  },
+  {
+    id: 6,
+    title: "Baralho Terapêutico",
+    description:
+      "O Baralho oferece uma leitura terapêutica (não oracular) que analisa seu campo energético para identificar dificuldades em determinadas áreas da vida, ajudando com esclarecimentos de como se posicionar energeticamente para melhor fluidez.",
+    image: "./cigano.jpeg",
+  },
+];
+
+const questions = [
+  "Isso será julgamento-livre?",
+  "E se eu não souber explicar como me sinto?",
+  "Por onde eu começo?",
+  "E se eu não estiver pronto(a) ainda?",
+  "Conversar com alguém realmente ajuda?",
+  "Posso só explorar minhas opções?",
+];
 
 export default function Servicos() {
-  const serviceContent = [
-    {
-      title: "Mesa Quantiônica",
-      description:
-        "A Mesa Quantiônica representa o ponto de partida em direção à HUMANOTERAPIA, usando a radiestesia, radiônica e física quântica para investigar e diagnosticar minuciosamente processos espirituais, mentais ou emocionais. Ela desvenda a raiz de dores e problemas, inclusive acessando encarnações passadas, oferecendo uma análise profunda sobre a origem de cada questão e sua relação com diversas áreas da vida, como relacionamentos, profissão, finanças, família ou saúde. Além disso, promove bem-estar, limpeza energética, alinhamento dos chakras e encaminhamento para tratamento, baseado no diagnóstico obtido pela mesa.",
-      button_url: "Saiba mais",
-      img_url: "./mesa.jpg",
-    },
-    {
-      title: "Humanometria",
-      description:
-        "A Humanometria, trata a energia presa no campo eletromagnético. Sabe quando a gente não consegue lidar com emoções difíceis e elas ficam presas na gente? Isso vira uma energia ruim, que causa problemas na nossa vida, causando doenças e bloqueios que são chamados de níveis. A Humanometria cuida para eliminar todos esses níveis. A Humanometria trata também, auto obsessão, obsessão de encarnado ou desencarnado e demais processos espirituais iniciados nesta ou em outras vidas. E é usada para o tratamento de estresse, desânimo, insônia, falta de interesse pela vida, irritabilidade e qualquer outro sintoma que está levando o assistido a um estado depressivo.",
-      button_url: "",
-      img_url: "./humanometria.png",
-    },
-    {
-      title: "Taquions Tock",
-      description:
-        "A Técnica de Taquions Tock trabalha com a frequência de quinta dimensão, atuando nos campos mental e emocional para tratamento de traumas e padrões conscientes e inconscientes, alinhando a vibração da pessoa a seu projeto de vida. A energia taquiônica sintoniza com quem somos em Essência para permitir que o equilíbrio aconteça. Conecta-nos com a fonte da criação trazendo o que é necessário para o momento. Amplia nossa consciência, traz coerência, sutileza, pensamentos leves e promove o bem-estar físico, emocional e mental.",
-      button_url: "",
-      img_url: "./taquions.jpeg",
-    },
-    {
-      title: "TDR",
-      description:
-        "O tratamento com a TDR é uma experiência de muita intensidade emocional, mental ou física, seja um trauma ou qualquer outra vivência na qual a pessoa não foi capaz de assimilar e digerir. A técnica trabalha na desconstrução do que causa a dor para que os mecanismos de defesa não sejam acionados e com isso proporciona a fluidez energética na vida da pessoa.",
-      button_url: "",
-      img_url: "./tdr.jpeg",
-    },
-    {
-      title: "Regressão com Reprogramação",
-      description:
-        "A finalidade desta técnica é rastrear os registros de memórias inconscientes, no corpo mental e corpo emocional, de fatos ocorridos nesta ou em outra vida, que estão causando dor. E, consequentemente, bloqueando e impedindo o fluxo da energia. É importante ressaltar que no decorrer da aplicação desta técnica a pessoa se mantém lúcida e consciente.",
-      button_url: "",
-      img_url: "./regressao.jpeg",
-    },
-    {
-      title: "Baralho Terapêutico",
-      description:
-        "A finalidade do Baralho é uma leitura terapêutica, e não oracular ou adivinhatória , pois a cada ação realizada, você muda o rumo da sua vida. É uma técnica que tem a capacidade de fazer a leitura do seu campo energético para analisar quais são as dificuldades que você encontra naquele momento em determinada área, e ajudar com esclarecimentos de como se posicionar energeticamente para que as coisas tenham uma fluidez melhor na sua vida.",
-      button_url: "",
-      img_url: "./cigano.jpeg",
-    },
-  ];
-  const [actives, setActives] = useState({
-    btn1: true,
-    btn2: false,
-    btn3: false,
-    btn4: false,
-    btn5: false,
-    btn6: false,
+  const [activeService, setActiveService] = useState(0);
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
   });
-  const [serviceInformations, setServiceInformations] = useState<any>();
 
-  useEffect(() => {
-    if (actives.btn1 === true) {
-      setServiceInformations(serviceContent[0]);
+  const scrollToContact = () => {
+    const element = document.getElementById("contato");
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
     }
-    if (actives.btn2 === true) {
-      setServiceInformations(serviceContent[1]);
-    }
-    if (actives.btn3 === true) {
-      setServiceInformations(serviceContent[2]);
-    }
-    if (actives.btn4 === true) {
-      setServiceInformations(serviceContent[3]);
-    }
-    if (actives.btn5 === true) {
-      setServiceInformations(serviceContent[4]);
-    }
-    if (actives.btn6 === true) {
-      setServiceInformations(serviceContent[5]);
-    }
-  }, [actives]);
+  };
+
   return (
-    <Container id="servicos">
-      <ContentService>
-        <LeftContent>
-          <button
-            onClick={() =>
-              setActives({
-                btn1: true,
-                btn2: false,
-                btn3: false,
-                btn4: false,
-                btn5: false,
-                btn6: false,
-              })
-            }
-          >
-            <Item active={actives["btn1"]}>Mesa Quantiônica</Item>
-          </button>
-          <button
-            onClick={() =>
-              setActives({
-                btn1: false,
-                btn2: true,
-                btn3: false,
-                btn4: false,
-                btn5: false,
-                btn6: false,
-              })
-            }
-          >
-            <Item active={actives["btn2"]}>Humanometria</Item>
-          </button>
-          <button
-            onClick={() =>
-              setActives({
-                btn1: false,
-                btn2: false,
-                btn3: true,
-                btn4: false,
-                btn5: false,
-                btn6: false,
-              })
-            }
-          >
-            <Item active={actives["btn3"]}>Taquions Tock</Item>
-          </button>
-          <button
-            onClick={() =>
-              setActives({
-                btn1: false,
-                btn2: false,
-                btn3: false,
-                btn4: true,
-                btn5: false,
-                btn6: false,
-              })
-            }
-          >
-            <Item active={actives["btn4"]}>TDR</Item>
-          </button>
-          <button
-            onClick={() =>
-              setActives({
-                btn1: false,
-                btn2: false,
-                btn3: false,
-                btn4: false,
-                btn5: true,
-                btn6: false,
-              })
-            }
-          >
-            <Item active={actives["btn5"]}>Regressão com Reprogramação</Item>
-          </button>
-          <button
-            onClick={() =>
-              setActives({
-                btn1: false,
-                btn2: false,
-                btn3: false,
-                btn4: false,
-                btn5: false,
-                btn6: true,
-              })
-            }
-          >
-            <Item active={actives["btn6"]}>Baralho Terapêutico</Item>
-          </button>
-        </LeftContent>
+    <Container id="servicos" ref={ref}>
+      <Content
+        as={motion.div}
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          style={{ textAlign: "center", marginBottom: "2rem" }}
+        >
+          <SectionLabel>Você não é o único passando por isso</SectionLabel>
 
-        <RightContent>
-          <ContentItem>
-            <div className="imgLeft">
-              <img src={serviceInformations?.img_url} alt="" />
-            </div>
-            <div className="textRight">
-              <h1>{serviceInformations?.title}</h1>
-              <p>{serviceInformations?.description}</p>
-              <Link to="orcamento" smooth={true} duration={500} offset={-125}>
-                <button>Saiba mais</button>
-              </Link>
-            </div>
-          </ContentItem>
-        </RightContent>
-      </ContentService>
+          <SectionTitle>
+            Um suporte que não adiciona mais peso
+            <br />
+            ao que você já carrega
+          </SectionTitle>
+
+          <SectionDescription>
+            Você não precisa ter certeza do que está sentindo, saber exatamente
+            o que falar, ou se encaixar em um rótulo. Nossas técnicas te
+            encontram onde você está.
+          </SectionDescription>
+        </motion.div>
+
+        <QuestionBadges
+          as={motion.div}
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {questions.map((question, index) => (
+            <QuestionBadge
+              key={index}
+              as={motion.span}
+              whileHover={{ scale: 1.02 }}
+            >
+              {question}
+            </QuestionBadge>
+          ))}
+        </QuestionBadges>
+
+        <ServicesWrapper>
+          <ServicesList>
+            {services.map((service, index) => (
+              <ServiceItem
+                key={service.id}
+                as={motion.button}
+                $active={activeService === index}
+                onClick={() => setActiveService(index)}
+                initial={{ opacity: 0, x: -30 }}
+                animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                transition={{ duration: 0.4, delay: 0.1 * index }}
+                whileHover={{ x: 8 }}
+              >
+                <span>{service.title}</span>
+                <ChevronRight size={18} />
+              </ServiceItem>
+            ))}
+          </ServicesList>
+
+          <AnimatePresence mode="wait">
+            <ServiceDetails
+              as={motion.div}
+              key={activeService}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+            >
+              <ServiceImage>
+                <img
+                  src={services[activeService].image}
+                  alt={services[activeService].title}
+                />
+              </ServiceImage>
+              <ServiceContent>
+                <ServiceTitle>{services[activeService].title}</ServiceTitle>
+                <ServiceDescription>
+                  {services[activeService].description}
+                </ServiceDescription>
+                <CTAButton onClick={scrollToContact}>
+                  Saiba mais
+                  <ArrowRight size={18} />
+                </CTAButton>
+              </ServiceContent>
+            </ServiceDetails>
+          </AnimatePresence>
+        </ServicesWrapper>
+      </Content>
     </Container>
   );
 }

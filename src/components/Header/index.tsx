@@ -1,61 +1,122 @@
-import { useState } from "react";
-import { Container, Content, ItemsMenu } from "./styles";
-import { slide as Menu } from "react-burger-menu";
-import { Link } from "react-scroll";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import {
+  Container,
+  Content,
+  Logo,
+  NavLinks,
+  NavLink,
+  CTAButton,
+  MobileMenuButton,
+  MobileMenu,
+  MobileNavLink,
+} from "./styles";
+
 export function Header() {
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  const navItems = [
+    { label: "Início", id: "hero" },
+    { label: "Humanoterapia", id: "humanoterapia" },
+    { label: "Técnicas", id: "servicos" },
+    { label: "Sobre mim", id: "sobre" },
+    { label: "Contato", id: "contato" },
+  ];
+
   return (
-    <Container>
+    <Container
+      as={motion.header}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      $isScrolled={isScrolled}
+    >
       <Content>
-        <img src="./logo2.png" alt="" />
-        <ItemsMenu>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Início
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Humanoterapia
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Técnicas
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Sobre mim
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Contato
-          </Link>
-          {/* Agendar uma consult CTA */}
-        </ItemsMenu>
-        <Menu
-          right
-          className="menuBox"
-          isOpen={isOpenMenu}
-          onOpen={() => setIsOpenMenu(true)}
-          onClose={() => setIsOpenMenu(false)}
+        <Logo onClick={() => scrollToSection("hero")}>
+          <img src="./logo3.png" alt="Humanoterapias" />
+        </Logo>
+
+        <NavLinks>
+          {navItems.map((item) => (
+            <NavLink key={item.id} onClick={() => scrollToSection(item.id)}>
+              {item.label}
+            </NavLink>
+          ))}
+        </NavLinks>
+
+        <CTAButton onClick={() => scrollToSection("contato")}>
+          Agendar Consulta
+        </CTAButton>
+
+        <MobileMenuButton
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Menu"
         >
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Humanoterapia
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Técnicas
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Sobre mim
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Psicoterapias Holísticas
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Radiestesia Radiônica
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Reiki
-          </Link>
-          <Link to="form" href="/" smooth={true} duration={500} offset={-100}>
-            Contato
-          </Link>
-        </Menu>
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </MobileMenuButton>
       </Content>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <MobileMenu
+            as={motion.div}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {navItems.map((item, index) => (
+              <MobileNavLink
+                key={item.id}
+                as={motion.button}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                onClick={() => scrollToSection(item.id)}
+              >
+                {item.label}
+              </MobileNavLink>
+            ))}
+            <CTAButton
+              as={motion.button}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              onClick={() => scrollToSection("contato")}
+              style={{ marginTop: "1rem" }}
+            >
+              Agendar Consulta
+            </CTAButton>
+          </MobileMenu>
+        )}
+      </AnimatePresence>
     </Container>
   );
 }

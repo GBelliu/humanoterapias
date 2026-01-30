@@ -1,7 +1,7 @@
 {
-  "name": "humanoterapia-vite",
+  "name": "humanoterapias",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,28 +10,26 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emailjs/browser": "^3.12.1",
-    "lucide-react": "^0.316.0",
-    "react": "^18.2.0",
-    "react-burger-menu": "^3.0.9",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.3",
-    "react-scroll": "^1.9.0",
-    "react-toastify": "^10.0.4",
+    "@emailjs/browser": "^4.3.3",
+    "framer-motion": "^11.0.8",
+    "lucide-react": "^0.344.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-intersection-observer": "^9.8.1",
+    "react-router-dom": "^6.22.3",
+    "react-toastify": "^10.0.5",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
-    "@types/react": "^18.2.43",
-    "@types/react-burger-menu": "^2.8.7",
-    "@types/react-dom": "^18.2.17",
-    "@types/react-scroll": "^1.8.10",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.55.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.8"
   }
 }
