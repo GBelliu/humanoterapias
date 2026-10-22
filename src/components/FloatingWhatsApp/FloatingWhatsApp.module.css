@@ -17,6 +17,13 @@
   pointer-events: auto;
 }
 
+/* No celular, o agendamento fica na barra inferior */
+@media (max-width: 899px) {
+  .floating {
+    display: none;
+  }
+}
+
 .button {
   min-height: 58px;
   box-shadow: 0 14px 30px -10px rgb(47 74 43 / 0.6);

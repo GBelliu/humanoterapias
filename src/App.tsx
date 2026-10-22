@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { initSmoothScroll } from "./lib/scroll";
+import { useActiveSection } from "./lib/useActiveSection";
 import { Header } from "./components/Header/Header";
+import { MobileMenu } from "./components/MobileMenu/MobileMenu";
+import { MobileDock } from "./components/MobileDock/MobileDock";
 import { Hero } from "./components/Hero/Hero";
 import { About } from "./components/About/About";
 import { Humanoterapia } from "./components/Humanoterapia/Humanoterapia";
@@ -13,6 +16,11 @@ import { Footer } from "./components/Footer/Footer";
 import { FloatingWhatsApp } from "./components/FloatingWhatsApp/FloatingWhatsApp";
 
 export function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const active = useActiveSection();
+  const toggleMenu = useCallback(() => setMenuOpen((open) => !open), []);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+
   useEffect(() => initSmoothScroll(), []);
 
   return (
@@ -20,7 +28,7 @@ export function App() {
       <a className="skip-link" href="#conteudo">
         Pular para o conteúdo
       </a>
-      <Header />
+      <Header active={active} menuOpen={menuOpen} onMenuToggle={toggleMenu} />
       <main id="conteudo">
         <Hero />
         <About />
@@ -33,6 +41,8 @@ export function App() {
       </main>
       <Footer />
       <FloatingWhatsApp />
+      <MobileMenu open={menuOpen} active={active} onClose={closeMenu} />
+      <MobileDock active={active} menuOpen={menuOpen} onMenuToggle={toggleMenu} />
     </>
   );
 }

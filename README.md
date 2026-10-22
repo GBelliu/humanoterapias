@@ -9,6 +9,15 @@ Site de apresentação e agendamento. Conceito: **uma flor de lótus que respira
 - **Como funciona:** um caule cresce com o scroll e brota uma folha a cada etapa.
 - **Contato:** a flor termina de florescer. Tocar nela solta pétalas (surpresa).
 
+**No celular** o site foi pensado para o polegar:
+
+- **Barra inferior fixa:** mostra em qual seção a pessoa está ("Seção 4 de 8 · Terapias"), com uma mini-lótus que floresce conforme o progresso da leitura. Tocar nela abre o menu de seções. Ao lado fica o botão **Agendar**.
+- **Cabeçalho:** só a logo, que some ao descer e volta ao subir.
+- **Topo:** a lótus aparece logo de início. O exercício de respiração abre em tela cheia.
+- **Terapias:** carrossel deslizável com botões de anterior/próxima e contador. A flor acima abre a pétala do cartão visível.
+
+**No desktop**, o item do menu da seção atual fica destacado e uma linha colorida sob o cabeçalho mostra o progresso.
+
 Stack: React 19, TypeScript, Vite 8, CSS Modules, GSAP (ScrollTrigger e SplitText), Lenis e lucide-react.
 
 ## Rodar
@@ -30,7 +39,7 @@ Todo o texto fica em **`src/content/`**. Não é preciso mexer nos componentes.
 | O que mudar | Arquivo |
 | --- | --- |
 | WhatsApp, Instagram, endereço, nome, registro e textos de SEO | `src/content/site.ts` |
-| Itens do menu | `src/content/navigation.ts` |
+| Seções (nomes da barra inferior) e itens do menu | `src/content/navigation.ts` |
 | Título do topo e textos do exercício de respiração | `src/content/hero.ts` |
 | "Sobre mim", formações e foto | `src/content/about.ts` |
 | "O que é Humanoterapia" e aviso de saúde | `src/content/humanoterapia.ts` |

@@ -4,11 +4,12 @@
   z-index: 50;
   transition:
     background-color 0.8s var(--ease-calm),
-    box-shadow 0.8s var(--ease-calm);
+    box-shadow 0.8s var(--ease-calm),
+    transform 0.7s var(--ease-calm);
 }
 
 .header[data-scrolled="true"] {
-  background: rgb(251 246 238 / 0.88);
+  background: rgb(251 246 238 / 0.9);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 1px 0 rgb(38 51 43 / 0.08);
@@ -63,6 +64,7 @@
 }
 
 .nav a {
+  position: relative;
   display: inline-block;
   padding: 0.6rem 0.8rem;
   border-radius: var(--radius-pill);
@@ -70,11 +72,19 @@
   font-weight: 600;
   text-decoration: none;
   color: var(--ink);
-  transition: background-color 0.5s var(--ease-calm);
+  transition:
+    background-color 0.5s var(--ease-calm),
+    color 0.5s var(--ease-calm);
 }
 
 .nav a:hover {
-  background: rgb(110 132 104 / 0.14);
+  background: rgb(110 132 104 / 0.12);
+}
+
+/* Seção atual */
+.nav a[aria-current="location"] {
+  background: rgb(110 132 104 / 0.16);
+  color: var(--sage-darker);
 }
 
 .actions {
@@ -101,53 +111,21 @@
   font-weight: 700;
 }
 
-.mobileMenu {
-  position: fixed;
-  inset: var(--header-h) 0 0;
-  overflow-y: auto;
-  background: var(--cream);
-  padding-block: 1.5rem 3rem;
-  animation: menuIn 0.6s var(--ease-calm);
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ee9f86, #e9c46a, #a9c48d, #86c3b4);
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-calm);
 }
 
-.mobileMenu[hidden] {
-  display: none;
-}
-
-.mobileMenu ul {
-  display: grid;
-  padding: 0;
-  list-style: none;
-  margin-bottom: 2rem;
-}
-
-.mobileMenu li + li {
-  border-top: 1px solid var(--sand-deep);
-}
-
-.mobileMenu a:not(.mobileCta) {
-  display: block;
-  padding: 1.05rem 0.25rem;
-  font-family: var(--font-serif);
-  font-size: 1.6rem;
-  text-decoration: none;
-}
-
-.mobileCta {
-  width: 100%;
-}
-
-.mobilePhone {
-  margin-top: 1rem;
-  text-align: center;
-  color: var(--ink-soft);
-}
-
-@keyframes menuIn {
-  from {
-    opacity: 0;
-    transform: translateY(-12px);
-  }
+.header[data-scrolled="true"] .progress {
+  opacity: 1;
 }
 
 /* O menu completo precisa de mais largura que o layout em colunas */
@@ -161,22 +139,27 @@
   }
 }
 
+/* Celular: só a logo no topo; menu, progresso e agendamento ficam na barra inferior */
 @media (max-width: 899px) {
-  .cta {
+  .header[data-hidden="true"] {
+    transform: translateY(-100%);
+  }
+
+  .cta,
+  .menuButton,
+  .progress {
     display: none;
   }
-}
 
-@media (max-width: 380px) {
   .lotus {
-    width: 44px;
+    width: 46px;
   }
 
   .humano {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
 
   .terapias {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 }

@@ -19,6 +19,7 @@ export const breathing = {
   start: "Respire comigo · 1 minuto",
   stop: "Parar",
   restart: "Fazer de novo",
+  close: "Voltar ao site",
   done: "Que bom que você se deu esse momento.",
   note: "Se sentir qualquer desconforto, pare e volte a respirar normalmente.",
 } as const;

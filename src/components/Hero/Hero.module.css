@@ -6,13 +6,11 @@
   padding-top: calc(var(--header-h) + 2rem);
   padding-bottom: 6rem;
   overflow: clip;
-  isolation: isolate;
 }
 
 .backdrop {
   position: absolute;
   inset: 0;
-  z-index: -1;
   background: linear-gradient(180deg, var(--cream) 0%, #f8efe2 70%, var(--cream) 100%);
 }
 
@@ -50,6 +48,7 @@
 }
 
 .inner {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   align-items: center;
@@ -156,8 +155,18 @@
     width: 100%;
   }
 
+  /* A lótus abre a página no celular, antes do título */
   .visual {
-    margin-top: 1rem;
+    order: -1;
+    margin-bottom: -0.5rem;
+  }
+
+  .copy {
+    gap: 1.1rem;
+  }
+
+  .title {
+    font-size: clamp(2.3rem, 10.5vw, 3rem);
   }
 
   .scrollCue {

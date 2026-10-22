@@ -33,6 +33,7 @@
   --gutter: clamp(1.25rem, 5vw, 3rem);
   --content: 1180px;
   --header-h: 76px;
+  --dock-h: 72px;
   --section-space: clamp(5rem, 12vw, 9rem);
 
   --ease-calm: cubic-bezier(0.22, 1, 0.36, 1);
@@ -243,6 +244,33 @@ section:focus {
 .btn-light:hover {
   background: var(--sand);
   transform: translateY(-2px);
+}
+
+/* ---------- Celular ---------- */
+
+@media (max-width: 899px) {
+  :root {
+    --header-h: 64px;
+    --section-space: 4.5rem;
+  }
+
+  html {
+    /* O cabeçalho some ao descer, então a seção pode encostar mais no topo */
+    scroll-padding-top: 16px;
+  }
+
+  body {
+    font-size: 1.0625rem;
+  }
+
+  .eyebrow {
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+  }
+
+  .eyebrow::before {
+    width: 20px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

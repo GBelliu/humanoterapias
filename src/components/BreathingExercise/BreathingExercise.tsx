@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
-import { Pause, Wind } from "lucide-react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { Pause, Wind, X } from "lucide-react";
 import { breathing, type BreathingPhaseKey } from "../../content";
-import { gsap, useGSAP, MOTION_OK, REDUCED_MOTION, prefersReducedMotion } from "../../lib/gsap";
+import { gsap, useGSAP, MOTION_OK, REDUCED_MOTION, DESKTOP_QUERY, prefersReducedMotion } from "../../lib/gsap";
+import { setScrollLocked } from "../../lib/scroll";
 import { Lotus } from "../Lotus/Lotus";
 import styles from "./BreathingExercise.module.css";
 
@@ -136,12 +137,25 @@ export function BreathingExercise() {
     rest();
   };
 
+  // No celular o exercício ocupa a tela inteira e trava o scroll enquanto estiver aberto.
+  useEffect(() => {
+    if (status === "idle" || window.matchMedia(DESKTOP_QUERY).matches) return;
+    setScrollLocked(true);
+    return () => setScrollLocked(false);
+  }, [status]);
+
+  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== "Escape" || status === "idle") return;
+    if (status === "running") stop();
+    else setStatus("idle");
+  };
+
   const running = status === "running";
   const phase = breathing.phases[phaseIndex];
   const message = running ? phase.label : status === "done" ? breathing.done : breathing.intro;
 
   return (
-    <div ref={scope} className={styles.exercise} id="respire">
+    <div ref={scope} className={styles.exercise} id="respire" data-status={status} onKeyDown={onKeyDown}>
       <div className={styles.stage}>
         <Lotus ref={lotusRef} className={styles.lotus} />
         <span className={styles.count} aria-hidden="true" data-visible={running}>
@@ -167,6 +181,12 @@ export function BreathingExercise() {
           {running ? <Pause aria-hidden="true" /> : <Wind aria-hidden="true" />}
           {running ? breathing.stop : status === "done" ? breathing.restart : breathing.start}
         </button>
+        {status === "done" && (
+          <button type="button" className={styles.close} onClick={() => setStatus("idle")}>
+            <X aria-hidden="true" />
+            {breathing.close}
+          </button>
+        )}
         <p className={styles.note}>{breathing.note}</p>
       </div>
     </div>

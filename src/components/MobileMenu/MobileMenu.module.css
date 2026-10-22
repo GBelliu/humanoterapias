@@ -1,0 +1,121 @@
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  background: rgb(38 51 43 / 0.35);
+  animation: fadeIn 0.5s var(--ease-calm);
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+.sheet {
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 1.25rem var(--gutter) calc(var(--dock-h) + 1.5rem);
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
+  background: var(--cream);
+  box-shadow: 0 -20px 50px -20px rgb(38 51 43 / 0.35);
+  animation: sheetIn 0.7s var(--ease-calm);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sage-deep);
+}
+
+.close {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 48px;
+  padding: 0.5rem 0.9rem;
+  border: 2px solid var(--sage-deep);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--sage-deep);
+  font-weight: 700;
+}
+
+.list {
+  display: grid;
+  padding: 0;
+  margin-bottom: 1.25rem;
+  list-style: none;
+}
+
+.list li + li {
+  border-top: 1px solid var(--sand-deep);
+}
+
+.list a {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-height: 60px;
+  padding: 0.6rem 0.25rem;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  text-decoration: none;
+}
+
+.list a[aria-current="location"] {
+  color: var(--sage-darker);
+  font-weight: 600;
+}
+
+.number {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  min-width: 1.6rem;
+}
+
+.here {
+  margin-left: auto;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  background: rgb(110 132 104 / 0.15);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--sage-darker);
+}
+
+.cta {
+  width: 100%;
+}
+
+.phone {
+  margin-top: 0.75rem;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes sheetIn {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}

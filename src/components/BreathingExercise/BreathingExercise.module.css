@@ -96,3 +96,75 @@
   font-size: 0.98rem;
   color: var(--ink-soft);
 }
+
+.close {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 48px;
+  padding: 0.5rem 1rem;
+  border: 0;
+  background: none;
+  color: var(--sage-darker);
+  font-weight: 700;
+}
+
+.close svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 899px) {
+  /* Parado: só a flor e o convite, para caber no topo da página */
+  .exercise[data-status="idle"] {
+    gap: 0.25rem;
+  }
+
+  .exercise[data-status="idle"] .stage {
+    width: min(62vw, 240px);
+  }
+
+  .exercise[data-status="idle"] .title,
+  .exercise[data-status="idle"] .message,
+  .exercise[data-status="idle"] .note {
+    display: none;
+  }
+
+  .exercise[data-status="idle"] :global(.btn) {
+    min-height: 48px;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    background: var(--white);
+    border-color: var(--sage-deep);
+    color: var(--sage-deep);
+    box-shadow: none;
+  }
+
+  /* Respirando: tela cheia, sem distrações */
+  .exercise:not([data-status="idle"]) {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    align-content: center;
+    padding: 2rem var(--gutter) calc(2rem + env(safe-area-inset-bottom));
+    background:
+      radial-gradient(70% 50% at 50% 35%, rgb(251 227 176 / 0.55), transparent 70%),
+      var(--cream);
+    animation: immerse 0.8s var(--ease-calm);
+  }
+
+  .exercise:not([data-status="idle"]) .stage {
+    width: min(84vw, 400px);
+  }
+
+  .exercise[data-status="done"] .close {
+    display: inline-flex;
+  }
+}
+
+@keyframes immerse {
+  from {
+    opacity: 0;
+  }
+}

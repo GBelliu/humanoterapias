@@ -12,6 +12,7 @@ export const therapiesSection = {
   title: "Cada terapia é uma pétala",
   text: "Toque em um cartão para ler mais. Você não precisa decidir isso agora: na conversa inicial, vemos juntos o que faz sentido para você.",
   flipHint: "Toque para saber mais",
+  swipeHint: "deslize para o lado",
   backHint: "Voltar",
   cta: "Perguntar sobre esta terapia",
 };

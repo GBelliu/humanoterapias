@@ -1,5 +1,5 @@
 import Lenis from "lenis";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "./gsap";
+import { gsap, ScrollTrigger, DESKTOP_QUERY, prefersReducedMotion } from "./gsap";
 
 let lenis: Lenis | null = null;
 
@@ -35,8 +35,10 @@ export function scrollToSection(id: string) {
   const target = document.getElementById(id);
   if (!target) return;
 
+  // No celular o cabeçalho se esconde ao descer, então a seção pode encostar mais no topo.
   const header = document.querySelector<HTMLElement>("[data-site-header]");
-  const offset = id === "inicio" ? 0 : -((header?.offsetHeight ?? 0) + 12);
+  const headerSpace = window.matchMedia(DESKTOP_QUERY).matches ? (header?.offsetHeight ?? 0) + 12 : 16;
+  const offset = id === "inicio" ? 0 : -headerSpace;
 
   if (lenis) {
     lenis.scrollTo(target, { offset, duration: 1.6 });
