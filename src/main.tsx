@@ -1,31 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { ThemeProvider } from "styled-components";
-import { BrowserRouter } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import App from "./App.tsx";
-import { theme, GlobalStyles } from "./styles";
-import "react-toastify/dist/ReactToastify.css";
+// Estilos globais primeiro, para que os módulos CSS dos componentes venham depois.
+import "@fontsource-variable/fraunces/soft.css";
+import "@fontsource-variable/fraunces/soft-italic.css";
+import "@fontsource-variable/nunito/index.css";
+import "lenis/dist/lenis.css";
+import "./styles/global.css";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <BrowserRouter>
-        <App />
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-      </BrowserRouter>
-    </ThemeProvider>
-  </React.StrictMode>,
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { App } from "./App";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
 );

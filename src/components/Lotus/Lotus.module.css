@@ -1,0 +1,66 @@
+.lotus {
+  --all: 0;
+  --seq: 0;
+  overflow: visible;
+}
+
+.petal {
+  /* Abertura desta pétala: o maior valor entre a abertura geral e a sequencial */
+  --f: max(var(--all), clamp(0, var(--seq) * 6 - var(--i), 1));
+  transform-box: view-box;
+  transform-origin: 0 0;
+  transform: translate(120px, 168px) rotate(calc(var(--a) * (0.1 + 0.9 * var(--f))));
+}
+
+.petal path:first-child {
+  stroke: #fffaf2;
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  transition:
+    stroke 0.8s ease,
+    opacity 0.8s ease;
+}
+
+.vein {
+  fill: none;
+  stroke: #fffaf2;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+/* Pétalas laterais da frente acompanham só a abertura geral */
+.side {
+  --f: var(--all);
+  opacity: calc(0.35 + 0.65 * var(--all));
+}
+
+/* Pétala central da frente: fica sempre de pé e fecha o botão */
+.front {
+  --f: 0;
+  opacity: calc(1 - 0.25 * var(--all));
+}
+
+.lotus[data-has-active] .petal:not(.front, .side) path:first-child {
+  opacity: 0.55;
+}
+
+.lotus[data-has-active] .petal[data-active] path:first-child {
+  opacity: 1;
+  stroke: #b4532a;
+  stroke-width: 3;
+}
+
+.glow {
+  opacity: calc(0.35 + 0.65 * max(var(--all), var(--seq)));
+}
+
+.water {
+  fill: #b6dbd1;
+  opacity: 0.45;
+}
+
+.seeds {
+  fill: #e9a23b;
+  opacity: max(0, calc(var(--all) * 1.6 - 0.6));
+}

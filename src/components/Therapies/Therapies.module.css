@@ -1,0 +1,222 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.aside {
+  position: sticky;
+  top: calc(var(--header-h) + 1.5rem);
+}
+
+.lotusWrap {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  margin-top: -1rem;
+}
+
+.lotus {
+  width: min(100%, 360px, 42vh);
+  height: auto;
+}
+
+.lotusLabel {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--sage-darker);
+  min-height: 1.6em;
+}
+
+.list {
+  display: grid;
+  gap: 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Cartão que vira ---------- */
+
+.card {
+  perspective: 1600px;
+}
+
+.inner {
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 1.1s var(--ease-calm);
+}
+
+.card[data-flipped="true"] .inner {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-m);
+  padding: clamp(1.5rem, 4vw, 2rem);
+}
+
+.front {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1.25rem;
+  align-content: center;
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+  transition:
+    box-shadow 0.6s var(--ease-calm),
+    transform 0.6s var(--ease-calm);
+}
+
+.card:hover .front {
+  box-shadow: var(--shadow-lift);
+}
+
+.back {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  transform: rotateY(180deg);
+  background: linear-gradient(160deg, var(--petal-tip), var(--white) 70%);
+  box-shadow: var(--shadow-lift);
+}
+
+.mark {
+  grid-row: span 3;
+  width: 44px;
+  height: auto;
+  align-self: start;
+  margin-top: 0.3rem;
+}
+
+.mark path {
+  fill: var(--petal-base);
+  stroke: var(--white);
+  stroke-width: 3;
+}
+
+.number {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+}
+
+.name {
+  font-size: clamp(1.5rem, 3vw, 1.85rem);
+  margin-block: 0.15rem 0.35rem;
+}
+
+.summary {
+  color: var(--ink-soft);
+}
+
+.flipButton {
+  grid-column: 2;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--sage-deep);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+/* O cartão inteiro responde ao toque */
+.flipButton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-m);
+}
+
+.flipButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.backTitle {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.description {
+  color: var(--ink);
+}
+
+.backActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.backCta {
+  min-height: 52px;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 48px;
+  padding: 0.5rem 0.25rem;
+  border: 0;
+  background: none;
+  color: var(--sage-darker);
+  font-weight: 700;
+}
+
+.backButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card[data-flipped="true"] .inner,
+  .back {
+    transform: none;
+  }
+
+  .card[data-flipped="true"] .front,
+  .card:not([data-flipped="true"]) .back {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 899px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aside {
+    position: static;
+  }
+
+  .lotus {
+    width: min(70%, 260px);
+  }
+
+  .lotusLabel {
+    display: none;
+  }
+
+  .backCta {
+    width: 100%;
+  }
+}

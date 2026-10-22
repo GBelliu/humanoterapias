@@ -1,0 +1,99 @@
+.wrap {
+  max-width: calc(52rem + var(--gutter) * 2);
+}
+
+.timeline {
+  position: relative;
+  padding-left: 4.5rem;
+}
+
+.stemTrack {
+  position: absolute;
+  left: calc(1rem + 10px);
+  top: 0.75rem;
+  bottom: 0.75rem;
+  width: 4px;
+  border-radius: 4px;
+  background: var(--sand-deep);
+}
+
+.stem {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, #a9c48d, var(--sage));
+  transform-origin: top;
+}
+
+.steps {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  position: relative;
+}
+
+.leaf {
+  position: absolute;
+  left: -3.6rem;
+  top: 0.2rem;
+  width: 40px;
+  height: 40px;
+  overflow: visible;
+}
+
+.leaf path:first-child {
+  fill: #a9c48d;
+  stroke: var(--white);
+  stroke-width: 2;
+}
+
+.leafVein {
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.stepBody {
+  display: grid;
+  gap: 0.4rem;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  border-radius: var(--radius-m);
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+}
+
+.stepNumber {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.stepBody h3 {
+  font-size: clamp(1.45rem, 3vw, 1.75rem);
+}
+
+.stepBody p {
+  color: var(--ink-soft);
+}
+
+@media (max-width: 899px) {
+  .timeline {
+    padding-left: 3.5rem;
+  }
+
+  .stemTrack {
+    left: calc(0.5rem + 10px);
+  }
+
+  .leaf {
+    left: -3.1rem;
+    width: 34px;
+    height: 34px;
+  }
+}

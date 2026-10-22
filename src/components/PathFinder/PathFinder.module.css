@@ -1,0 +1,172 @@
+.section {
+  background:
+    radial-gradient(60% 50% at 15% 10%, rgb(246 193 166 / 0.35), transparent 70%),
+    radial-gradient(50% 50% at 90% 90%, rgb(182 219 209 / 0.45), transparent 70%),
+    var(--sand);
+}
+
+.card {
+  max-width: 46rem;
+  margin-inline: auto;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border-radius: var(--radius-l);
+  background: var(--white);
+  box-shadow: var(--shadow-lift);
+}
+
+.progress {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0;
+  margin-bottom: 1.75rem;
+  list-style: none;
+}
+
+.progress li {
+  width: 16px;
+  height: 16px;
+  border-radius: 50% 0;
+  rotate: 45deg;
+  background: var(--sand-deep);
+  transition: background-color 0.8s ease;
+}
+
+.progress li[data-state="current"] {
+  background: var(--peach);
+}
+
+.progress li[data-state="done"] {
+  background: var(--sage);
+}
+
+.step {
+  display: grid;
+  gap: 1.1rem;
+  animation: stepIn 0.9s var(--ease-calm);
+}
+
+@keyframes stepIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.counter {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--sage-deep);
+  text-align: center;
+}
+
+.question {
+  font-size: clamp(1.6rem, 3.6vw, 2.1rem);
+  text-align: center;
+}
+
+.question:focus {
+  outline: none;
+}
+
+.options {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+  margin-top: 0.5rem;
+}
+
+.option {
+  width: 100%;
+  min-height: 60px;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--sand-deep);
+  border-radius: var(--radius-m);
+  background: var(--cream);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: left;
+  transition:
+    border-color 0.5s var(--ease-calm),
+    background-color 0.5s var(--ease-calm),
+    transform 0.6s var(--ease-calm);
+}
+
+.option:hover {
+  border-color: var(--sage);
+  background: rgb(110 132 104 / 0.08);
+  transform: translateX(4px);
+}
+
+.option[aria-pressed="true"] {
+  border-color: var(--sage-deep);
+  background: rgb(110 132 104 / 0.14);
+}
+
+.textButton {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 48px;
+  padding: 0.5rem 1rem;
+  border: 0;
+  background: none;
+  color: var(--sage-darker);
+  font-weight: 700;
+}
+
+.textButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.resultText {
+  color: var(--ink);
+  text-align: center;
+}
+
+.suggestions {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.suggestions li {
+  display: grid;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-s);
+  background: var(--cream);
+  border-left: 4px solid var(--peach);
+}
+
+.suggestions strong {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.suggestions span {
+  color: var(--ink-soft);
+}
+
+.note {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.resultActions {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 899px) {
+  .resultActions a {
+    width: 100%;
+  }
+}

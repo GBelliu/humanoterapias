@@ -1,0 +1,143 @@
+.section {
+  overflow: clip;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.flower {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.flower::before {
+  content: "";
+  position: absolute;
+  inset: 8% 4%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(246 193 166 / 0.4), transparent 68%);
+  z-index: -1;
+}
+
+.lotusButton {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+
+.lotus {
+  width: min(100%, 460px);
+  height: auto;
+  transition: transform 1.2s var(--ease-calm);
+}
+
+.lotusButton:hover .lotus {
+  transform: scale(1.03);
+}
+
+.petals {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  pointer-events: none;
+}
+
+.fallingPetal {
+  position: absolute;
+  width: 26px;
+  height: auto;
+  left: -13px;
+  top: -18px;
+  visibility: hidden;
+}
+
+.cta {
+  display: grid;
+  justify-items: start;
+  gap: 0.6rem;
+  margin-top: -1rem;
+}
+
+.ctaButton {
+  min-height: 64px;
+  padding-inline: 2rem;
+  font-size: 1.15rem;
+}
+
+.phone {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.cards {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  margin-top: 2.25rem;
+  list-style: none;
+}
+
+.infoCard {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 1rem;
+  padding: 1.25rem 1.4rem;
+  border-radius: var(--radius-m);
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+}
+
+.infoCard > svg {
+  width: 28px;
+  height: 28px;
+  color: var(--sage-deep);
+  margin-top: 0.15rem;
+}
+
+.infoCard h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+}
+
+.infoCard p {
+  color: var(--ink-soft);
+}
+
+.link {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding-block: 0.35rem;
+  font-weight: 700;
+  color: var(--sage-darker);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 899px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .flower {
+    order: 2;
+  }
+
+  .lotus {
+    width: min(80%, 320px);
+  }
+
+  .cta,
+  .ctaButton {
+    width: 100%;
+  }
+}
