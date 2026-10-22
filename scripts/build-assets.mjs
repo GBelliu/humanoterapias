@@ -7,7 +7,7 @@ import sharp from "sharp";
 
 const photos = [
   // `crop` é opcional: recorta a área útil da foto original antes de redimensionar.
-  { input: "assets/christiane.png", output: "public/images/christiane.webp", width: 520, crop: { left: 100, top: 176, width: 520, height: 928 } },
+  { input: "assets/christiane.jpg", output: "public/images/christiane.webp", width: 640 },
   { input: "assets/sessao.png", output: "public/images/sessao.webp", width: 960, crop: { left: 0, top: 0, width: 1024, height: 1024 } },
 ];
 

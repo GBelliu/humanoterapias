@@ -4,9 +4,9 @@ export const about = {
   title: "Um espaço seguro para você se reencontrar",
   photo: {
     src: "/images/christiane.webp",
-    alt: "Christiane Bellissimo sorrindo, com cabelos longos e cacheados",
-    width: 520,
-    height: 928,
+    alt: "Christiane Bellissimo sorrindo, com cabelos longos e cacheados e jaleco branco",
+    width: 640,
+    height: 853,
   },
   paragraphs: [
     "Ajudo pessoas a reconhecerem suas forças e valores, despertando autoconfiança para buscarem o que as faz felizes.",
